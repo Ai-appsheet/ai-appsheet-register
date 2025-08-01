@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ai-Appsheet</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+
+<div class="container register-container">
+  <div class="card shadow-lg p-4">
+    <div class="card-body">
+      <div class="text-center mb-4">
+        <h3 class="fw-bold">Register</h3>
+        <p class="text-muted">กรุณากรอกข้อมูลเพื่อลงทะเบียน</p>
+      </div>
+
+      <form method="post" autocomplete="off" name="hello-sheet">
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Name</label>
+          <input type="text" class="form-control form-control-lg" id="fullName" placeholder="ชื่อ-สกุล" name="ชื่อ-สกุล" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="IdEmployee" class="form-label">ID Employee</label>
+          <input type="text" class="form-control form-control-lg" id="IdEmployee" placeholder="รหัสพนักงาน" name="รหัสพนักงาน">
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="tel" class="form-control form-control-lg" id="phone" placeholder="เบอร์โทร" name="เบอร์โทร" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="อีเมล" class="form-control form-control-lg" id="email" placeholder="อีเมล" required>
+        </div>
+
+        <input type="hidden" name="userID" id="userID">
+
+        <div class="d-grid mt-4">
+          <button type="submit" class="btn btn-primary btn-lg fw-bold">บันทึกข้อมูล</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  async function main() {
+    await liff.init({ liffId: "2007842066-RmGxQjV6" });
+
+    if (!liff.isLoggedIn()) {
+      liff.login();
+    } else {
+      const profile = await liff.getProfile();
+      document.getElementById('userID').value = profile.userId;
+    }
+  }
+
+  main();
+
+  // ---------------------------------------------------------------------------------
+  // ----  สำคัญ: วาง URL ที่คัดลอกมา จากขั้นตอนที่ 1 ลงในเครื่องหมาย ' ' ตรงนี้  ----
+  // ---------------------------------------------------------------------------------
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwBnZS-eTFpgx_I35RmMuApwNQmIvd6EbyZzB-p32A37lUdyMX_UYb4cus6pavYTcH61w/exec';
+  const form = document.forms['hello-sheet'];
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // แสดงสถานะ "กำลังโหลด" ทันทีที่กด submit
+    Swal.fire({
+        title: 'กำลังบันทึกข้อมูล...',
+        text: 'กรุณารอสักครู่',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+      .then(response => response.json())
+      .then(data => {
+        if (data.result === 'success') {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'บันทึกสำเร็จ',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          form.reset();
+        } else if (data.error === 'duplicate') {
+          Swal.fire({
+            icon: 'warning',
+            title: 'ลงทะเบียนแล้ว',
+            text: 'คุณได้ลงทะเบียนไว้ในระบบแล้ว',
+          });
+        } else {
+          throw new Error(data.error || 'Something went wrong');
+        }
+      })
+      .catch(error => {
+          console.error('Error!', error.message)
+          Swal.fire({
+              icon: 'error',
+              title: 'เกิดข้อผิดพลาด!',
+              text: 'ไม่สามารถบันทึกข้อมูลได้',
+          });
+      });
+  });
+</script>
+
+</body>
+</html>
