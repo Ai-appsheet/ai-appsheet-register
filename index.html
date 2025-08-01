@@ -97,8 +97,8 @@
         } else if (data.error === 'duplicate') {
           Swal.fire({
             icon: 'warning',
-            title: 'ลงทะเบียนแล้ว',
-            text: 'คุณได้ลงทะเบียนไว้ในระบบแล้ว',
+            title: 'คุณได้ลงทะเบียน',
+            text: 'กรณีต้องการเปลี่ยนแปลงข้อมูลกรุณาติดต่อแอดมิน',
           });
         } else {
           throw new Error(data.error || 'Something went wrong');
