@@ -3,55 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ai-Appsheet</title>
+  <title>Ai-Appsheet | Modern Register</title>
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <style>
+    /* ---- Custom Styles ---- */
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2029&auto=format&fit=crop'); /* Modern background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .register-card {
+      background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: none;
+      display: flex;
+      flex-direction: row;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .register-image-side {
+      background: url('https://img5.pic.in.th/file/secure-sv1/-Live---appsheet.png') center/cover;
+      width: 45%;
+    }
+
+    .register-form-side {
+      width: 55%;
+      padding: 3rem;
+    }
+
+    .card-title {
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-subtitle {
+      color: #6c757d;
+      margin-bottom: 2rem;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #555;
+    }
+
+    .input-group-text {
+      background-color: transparent;
+      border-right: none;
+      color: #007bff;
+    }
+
+    .form-control {
+      border-left: none;
+      border-radius: 0 0.25rem 0.25rem 0;
+      padding-left: 0;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #007bff;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(45deg, #007bff, #0056b3);
+      border: none;
+      border-radius: 50px;
+      padding: 12px 30px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    }
+    
+    /* Responsive for mobile */
+    @media (max-width: 768px) {
+      .register-image-side {
+        display: none; /* Hide image on smaller screens */
+      }
+      .register-form-side {
+        width: 100%;
+        padding: 2rem;
+      }
+      .register-card {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="container register-container">
-  <div class="card shadow-lg p-4">
-    <div class="card-body">
-      <div class="text-center mb-4">
-        <h3 class="fw-bold">Register</h3>
-        <p class="text-muted">กรุณากรอกข้อมูลเพื่อลงทะเบียน</p>
+<div class="register-card">
+  <div class="register-image-side"></div>
+
+  <div class="register-form-side">
+    <div class="text-center mb-4">
+      <h3 class="card-title">ลงทะเบียนเข้าสู่ระบบ</h3>
+      <p class="card-subtitle">กรุณากรอกข้อมูลของคุณให้ครบถ้วน</p>
+    </div>
+
+    <form method="post" autocomplete="off" name="hello-sheet">
+      <div class="mb-3">
+        <label for="fullName" class="form-label">ชื่อ-สกุล</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input type="text" class="form-control" id="fullName" placeholder="Full Name" name="ชื่อ-สกุล" required>
+        </div>
       </div>
 
-      <form method="post" autocomplete="off" name="hello-sheet">
-        <div class="mb-3">
-          <label for="fullName" class="form-label">Name</label>
-          <input type="text" class="form-control form-control-lg" id="fullName" placeholder="ชื่อ-สกุล" name="ชื่อ-สกุล" required>
+      <div class="mb-3">
+        <label for="IdEmployee" class="form-label">รหัสพนักงาน</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+          </div>
+          <input type="text" class="form-control" id="IdEmployee" placeholder="Employee ID" name="รหัสพนักงาน">
         </div>
+      </div>
 
-        <div class="mb-3">
-          <label for="IdEmployee" class="form-label">ID Employee</label>
-          <input type="text" class="form-control form-control-lg" id="IdEmployee" placeholder="รหัสพนักงาน" name="รหัสพนักงาน">
+      <div class="mb-3">
+        <label for="phone" class="form-label">เบอร์โทรศัพท์</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+          </div>
+          <input type="tel" class="form-control" id="phone" placeholder="Phone Number" name="เบอร์โทร" required>
         </div>
+      </div>
 
-        <div class="mb-3">
-          <label for="phone" class="form-label">Phone</label>
-          <input type="tel" class="form-control form-control-lg" id="phone" placeholder="เบอร์โทร" name="เบอร์โทร" required>
+      <div class="mb-3">
+        <label for="email" class="form-label">อีเมล</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          </div>
+          <input type="email" name="อีเมล" class="form-control" id="email" placeholder="Email Address" required>
         </div>
+      </div>
 
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" name="อีเมล" class="form-control form-control-lg" id="email" placeholder="อีเมล" required>
-        </div>
+      <input type="hidden" name="userID" id="userID">
 
-        <input type="hidden" name="userID" id="userID">
-
-        <div class="d-grid mt-4">
-          <button type="submit" class="btn btn-primary btn-lg fw-bold">บันทึกข้อมูล</button>
-        </div>
-      </form>
-    </div>
+      <div class="text-center mt-4">
+    <button type="submit" class="btn btn-success fw-bold w-50">ลงทะเบียน</button>
+</div>
+    </form>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
   async function main() {
-    await liff.init({ liffId: "2007842066-RmGxQjV6" });
+    // ---------------------------------------------------------------------------------
+    // ---- สำคัญ: liffId ของคุณ ถูกต้องแล้ว ไม่ต้องแก้ไขส่วนนี้ ----
+    // ---------------------------------------------------------------------------------
+    await liff.init({ liffId: "" });
 
     if (!liff.isLoggedIn()) {
       liff.login();
@@ -64,7 +196,7 @@
   main();
 
   // ---------------------------------------------------------------------------------
-  // ----  สำคัญ: วาง URL ที่คัดลอกมา จากขั้นตอนที่ 1 ลงในเครื่องหมาย ' ' ตรงนี้  ----
+  // ---- สำคัญ: URL ของ Google Apps Script ของคุณ ถูกต้องแล้ว ไม่ต้องแก้ไขส่วนนี้ ----
   // ---------------------------------------------------------------------------------
   const scriptURL = 'https://script.google.com/macros/s/AKfycbwBnZS-eTFpgx_I35RmMuApwNQmIvd6EbyZzB-p32A37lUdyMX_UYb4cus6pavYTcH61w/exec';
   const form = document.forms['hello-sheet'];
@@ -72,14 +204,14 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
 
-    // แสดงสถานะ "กำลังโหลด" ทันทีที่กด submit
+    // Show "loading" status with SweetAlert2
     Swal.fire({
-        title: 'กำลังบันทึกข้อมูล...',
-        text: 'กรุณารอสักครู่',
-        allowOutsideClick: false,
-        didOpen: () => {
-            Swal.showLoading();
-        }
+      title: 'กำลังบันทึกข้อมูล...',
+      text: 'กรุณารอสักครู่',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
     });
 
     fetch(scriptURL, { method: 'POST', body: new FormData(form) })
@@ -89,28 +221,29 @@
           Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'บันทึกสำเร็จ',
+            title: 'บันทึกข้อมูลสำเร็จ!',
+            text: 'ข้อมูลของคุณถูกบันทึกในระบบเรียบร้อยแล้ว',
             showConfirmButton: false,
-            timer: 1500
+            timer: 2000
           });
           form.reset();
         } else if (data.error === 'duplicate') {
           Swal.fire({
             icon: 'warning',
-            title: 'คุณได้ลงทะเบียน',
-            text: 'กรณีต้องการเปลี่ยนแปลงข้อมูลกรุณาติดต่อแอดมิน',
+            title: 'ลงทะเบียนแล้ว',
+            text: 'คุณได้ลงทะเบียนไว้ในระบบแล้ว ไม่จำเป็นต้องลงทะเบียนซ้ำ',
           });
         } else {
           throw new Error(data.error || 'Something went wrong');
         }
       })
       .catch(error => {
-          console.error('Error!', error.message)
-          Swal.fire({
-              icon: 'error',
-              title: 'เกิดข้อผิดพลาด!',
-              text: 'ไม่สามารถบันทึกข้อมูลได้',
-          });
+        console.error('Error!', error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'เกิดข้อผิดพลาด!',
+          text: 'ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่อีกครั้ง',
+        });
       });
   });
 </script>
